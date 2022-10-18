@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class leetcode_78 {
+
+    static List<List<Integer>> result=new ArrayList<>();
+    static LinkedList<Integer> path=new LinkedList<>();
+
+    public static List<List<Integer>> subsets(int[] nums) {
+        backstacking(nums,0);
+        return result;
+    }
+    private static void backstacking(int[] nums, int StartIndex){
+        result.add(new ArrayList<>(path));
+
+        if(StartIndex>=nums.length){
+            return;
+        }
+
+        for(int i=StartIndex;i<nums.length;i++){
+            path.add(nums[i]);
+            System.out.println(path);
+            backstacking(nums,i+1);
+            path.removeLast();
+            System.out.println("移出后的"+path);
+        }
+    }
+
+    public static void main(String[] args) {
+        int nums[]=new int[]{1,2,3};
+        result=subsets(nums);
+        //System.out.println(result);
+    }
+
+}
